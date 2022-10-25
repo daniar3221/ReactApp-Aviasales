@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./transfer-filter.css";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../redux/actions";
@@ -7,13 +7,15 @@ function TransferFilter() {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
 
+  // console.log(selector);
+
   return (
     <div className="transfer-filter">
       <h4>КОЛИЧЕСТВО ПЕРЕСАДОК</h4>
       <div className="transfer-filter-item">
         <input
           type="checkbox"
-          checked={selector[0]}
+          checked={selector.transferFilter[0]}
           onChange={() => {
             dispatch(actions.allTickets);
           }}
@@ -23,7 +25,7 @@ function TransferFilter() {
       <div className="transfer-filter-item">
         <input
           type="checkbox"
-          checked={selector[1]}
+          checked={selector.transferFilter[1]}
           onChange={() => {
             dispatch(actions.noTransfers);
           }}
@@ -33,7 +35,7 @@ function TransferFilter() {
       <div className="transfer-filter-item">
         <input
           type="checkbox"
-          checked={selector[2]}
+          checked={selector.transferFilter[2]}
           onChange={() => {
             dispatch(actions.oneTransfer);
           }}
@@ -43,7 +45,7 @@ function TransferFilter() {
       <div className="transfer-filter-item">
         <input
           type="checkbox"
-          checked={selector[3]}
+          checked={selector.transferFilter[3]}
           onChange={() => {
             dispatch(actions.twoTransfers);
           }}
@@ -53,7 +55,7 @@ function TransferFilter() {
       <div className="transfer-filter-item">
         <input
           type="checkbox"
-          checked={selector[4]}
+          checked={selector.transferFilter[4]}
           onChange={() => {
             dispatch(actions.threeTransfers);
           }}

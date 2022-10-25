@@ -1,6 +1,6 @@
 const defaultState = [false, false, false, false, false];
 
-const transferReducer = (state = defaultState, action) => {
+const transferFilterReducer = (state = defaultState, action) => {
   switch (action.type) {
     case "ALL":
       if (!state[0]) return [true, true, true, true, true];
@@ -35,4 +35,4 @@ const transferReducer = (state = defaultState, action) => {
   }
 };
 
-export default transferReducer;
+export default transferFilterReducer;
