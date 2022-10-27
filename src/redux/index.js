@@ -5,11 +5,19 @@ import reduxThunk from "redux-thunk";
 import searchIdReducer from "./searchIdReducer";
 import ticketsReducer from "./ticketsReducer";
 import transferFilterReducer from "./transfersFilterReducer";
+import loadingReducer from "./onLoadingReducer";
+import onErrorReducer from "./onErrorReducer";
+import sortTicketsReducer from "./sortTicketsReducer";
+import quantityTickets from "./quantityTicketsReducer";
 
 const rootReducer = combineReducers({
   tickets: ticketsReducer,
   transferFilter: transferFilterReducer,
   searchId: searchIdReducer,
+  onLoad: loadingReducer,
+  onError: onErrorReducer,
+  sort: sortTicketsReducer,
+  quantityTickets: quantityTickets,
 });
 
 const loggerMiddleware = (store) => (next) => (action) => {

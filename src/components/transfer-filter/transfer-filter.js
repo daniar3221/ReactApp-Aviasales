@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./transfer-filter.css";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../redux/actions";
@@ -6,8 +6,6 @@ import * as actions from "../../redux/actions";
 function TransferFilter() {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-
-  // console.log(selector);
 
   return (
     <div className="transfer-filter">
