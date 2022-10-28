@@ -1,21 +1,58 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   sortCheapTicketsAction,
   sortFastTicketsAction,
   sortOptimalTicketsAction,
   backToFiveAction,
+  setSortedTicketsAction,
 } from "../../redux/actions";
 import "./ticket-sort.css";
 
 function TicketFilter() {
   const dispatch = useDispatch();
+  const ticketsSelector = useSelector((state) => state.renderedTicket);
+  const selector = useSelector((state) => state);
 
-  const changeActiveStyle = (idxBtn) => {
-    const buttons = document.querySelectorAll(".btn-sort");
-    const btnArr = [...buttons];
-    btnArr.map((item) => item.classList.remove("sort-active"));
-    btnArr[idxBtn].classList.add("sort-active");
+  useEffect(() => {
+    const sortButtons = document.querySelectorAll(".btn-sort");
+    const buttons = [...sortButtons];
+    buttons.map((btn) => btn.classList.remove("sort-active"));
+    switch (selector.sort) {
+      case "CHEAP":
+        buttons[0].classList.add("sort-active");
+        break;
+      case "FAST":
+        buttons[1].classList.add("sort-active");
+        break;
+      case "OPTIMAL":
+        buttons[2].classList.add("sort-active");
+        break;
+      default:
+        return;
+    }
+  }, [selector.sort]);
+
+  const cheapSort = () => {
+    const cheapTickets = ticketsSelector.sort(
+      (prev, next) => prev.price - next.price
+    );
+    dispatch(setSortedTicketsAction(cheapTickets));
+  };
+
+  const fastSort = () => {
+    const fastTickets = ticketsSelector.sort(
+      (prev, next) => prev.segments[0].duration - next.segments[0].duration
+    );
+    dispatch(setSortedTicketsAction(fastTickets));
+  };
+
+  const optimalSort = () => {
+    const optimalTickets = ticketsSelector.sort((prev, next) =>
+      prev.carrier.localeCompare(next.carrier)
+    );
+    console.log(optimalTickets);
+    dispatch(setSortedTicketsAction(optimalTickets));
   };
 
   return (
@@ -24,9 +61,9 @@ function TicketFilter() {
         type="button"
         className="btn-sort cheapest"
         onClick={() => {
-          changeActiveStyle(0);
           dispatch(backToFiveAction);
           dispatch(sortCheapTicketsAction);
+          cheapSort();
         }}
       >
         САМЫЙ ДЕШЕВЫЙ
@@ -35,9 +72,9 @@ function TicketFilter() {
         type="button"
         className="btn-sort fastest"
         onClick={() => {
-          changeActiveStyle(1);
           dispatch(backToFiveAction);
           dispatch(sortFastTicketsAction);
+          fastSort();
         }}
       >
         САМЫЙ БЫСТРЫЙ
@@ -46,9 +83,9 @@ function TicketFilter() {
         type="button"
         className="btn-sort optional"
         onClick={() => {
-          changeActiveStyle(2);
           dispatch(backToFiveAction);
           dispatch(sortOptimalTicketsAction);
+          optimalSort();
         }}
       >
         ОПТИМАЛЬНЫЙ

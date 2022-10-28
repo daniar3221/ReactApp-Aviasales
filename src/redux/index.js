@@ -9,6 +9,7 @@ import loadingReducer from "./onLoadingReducer";
 import onErrorReducer from "./onErrorReducer";
 import sortTicketsReducer from "./sortTicketsReducer";
 import quantityTickets from "./quantityTicketsReducer";
+import renderedTicketsReducer from "./renderedTicketsReducer";
 
 const rootReducer = combineReducers({
   tickets: ticketsReducer,
@@ -18,11 +19,12 @@ const rootReducer = combineReducers({
   onError: onErrorReducer,
   sort: sortTicketsReducer,
   quantityTickets: quantityTickets,
+  renderedTicket: renderedTicketsReducer,
 });
 
 const loggerMiddleware = (store) => (next) => (action) => {
   const result = next(action);
-  console.log("Middleware", store.getState());
+  // console.log("Middleware", store.getState());
   return result;
 };
 

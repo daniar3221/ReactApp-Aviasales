@@ -7,6 +7,8 @@ import TicketList from "../ticket-list/ticket-list";
 import Spinner from "../spinner/spiner";
 import "antd/dist/antd.css";
 
+import { initRenderedTicketsAction } from "../../redux/actions";
+
 import { useDispatch, useSelector } from "react-redux";
 import { getSearchId, getFirstTickets } from "../services/services";
 
@@ -19,9 +21,6 @@ function App() {
   const quantityTicketsSelector = useSelector((state) => state.quantityTickets);
 
   let ticketsSelector = useSelector((state) => state.tickets);
-  ticketsSelector = ticketsSelector.slice(0, quantityTicketsSelector);
-
-  // const [renderedTickets, setRenderedTickets] = useState([]);
 
   useEffect(() => {
     dispatch(getSearchId());
@@ -31,6 +30,10 @@ function App() {
     if (!searchId) return;
     dispatch(getFirstTickets(searchId));
   }, [dispatch, searchId]);
+
+  useEffect(() => {
+    dispatch(initRenderedTicketsAction(ticketsSelector));
+  }, [dispatch, ticketsSelector]);
 
   const errorDiv = () => {
     return (
@@ -54,7 +57,7 @@ function App() {
           ) : onErrorSelector ? (
             errorDiv()
           ) : (
-            <TicketList renderedTickets={ticketsSelector} />
+            <TicketList />
           )}
         </div>
       </div>

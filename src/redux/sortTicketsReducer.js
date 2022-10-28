@@ -2,6 +2,8 @@ const defaultState = "CHEAP";
 
 const sortTicketsReducer = (state = defaultState, action) => {
   switch (action.type) {
+    case "NO-SORT":
+      return "NO-SORT";
     case "CHEAP":
       return "CHEAP";
     case "FAST":

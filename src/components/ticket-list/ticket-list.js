@@ -7,10 +7,13 @@ import "./ticket-list.css";
 
 function TicketList({ renderedTickets }) {
   const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
 
-  const tickets = renderedTickets.map((ticket) => {
-    return <TicketItem key={uuidv4()} {...ticket} />;
-  });
+  const tickets = selector.renderedTicket
+    .slice(0, selector.quantityTickets)
+    .map((ticket) => {
+      return <TicketItem key={uuidv4()} {...ticket} />;
+    });
 
   return (
     <div className="ticket-list">
