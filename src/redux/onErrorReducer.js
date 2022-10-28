@@ -1,8 +1,8 @@
 const defaultState = false;
 
-const onErrorReducer = (state = defaultState, action) => {
+const onErrorReducer = (state = defaultState, action = {}) => {
   switch (action.type) {
-    case "ERROR":
+    case 'ERROR':
       return true;
     default:
       return state;

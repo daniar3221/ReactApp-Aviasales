@@ -1,8 +1,8 @@
-const defaultState = "";
+const defaultState = '';
 
-const searchIdReducer = (state = defaultState, action) => {
+const searchIdReducer = (state = defaultState, action = {}) => {
   switch (action.type) {
-    case "INIT-SEARCH-ID":
+    case 'INIT-SEARCH-ID':
       return action.payload;
     default:
       return state;

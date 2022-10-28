@@ -1,33 +1,37 @@
 const defaultState = [true, true, true, true, true];
 
-const transferFilterReducer = (state = defaultState, action) => {
+const transferFilterReducer = (state = defaultState, action = {}) => {
   switch (action.type) {
-    case "ALL":
+    case 'ALL':
       if (!state[0]) return [true, true, true, true, true];
       return [false, false, false, false, false];
 
-    case "NO":
+    case 'NO':
       if (state[0]) return [false, false, true, true, true];
-      if (!state[1] && state[2] && state[3] && state[4])
+      if (!state[1] && state[2] && state[3] && state[4]) {
         return [true, true, true, true, true];
+      }
       return [state[0], !state[1], state[2], state[3], state[4]];
 
-    case "ONE-TRANSFER":
+    case 'ONE-TRANSFER':
       if (state[0]) return [false, true, false, true, true];
-      if (state[1] && !state[2] && state[3] && state[4])
+      if (state[1] && !state[2] && state[3] && state[4]) {
         return [true, true, true, true, true];
+      }
       return [state[0], state[1], !state[2], state[3], state[4]];
 
-    case "TWO-TRANSFERS":
+    case 'TWO-TRANSFERS':
       if (state[0]) return [false, true, true, false, true];
-      if (state[1] && state[2] && !state[3] && state[4])
+      if (state[1] && state[2] && !state[3] && state[4]) {
         return [true, true, true, true, true];
+      }
       return [state[0], state[1], state[2], !state[3], state[4]];
 
-    case "THREE-TRANSFERS":
+    case 'THREE-TRANSFERS':
       if (state[0]) return [false, true, true, true, false];
-      if (state[1] && state[2] && state[3] && !state[4])
+      if (state[1] && state[2] && state[3] && !state[4]) {
         return [true, true, true, true, true];
+      }
       return [state[0], state[1], state[2], state[3], !state[4]];
 
     default:

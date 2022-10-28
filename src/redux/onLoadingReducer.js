@@ -1,10 +1,10 @@
 const defaultState = true;
 
-const loadingReducer = (state = defaultState, action) => {
+const loadingReducer = (state = defaultState, action = {}) => {
   switch (action.type) {
-    case "LOADING":
+    case 'LOADING':
       return true;
-    case "FINISH-LOADING":
+    case 'FINISH-LOADING':
       return false;
     default:
       return state;

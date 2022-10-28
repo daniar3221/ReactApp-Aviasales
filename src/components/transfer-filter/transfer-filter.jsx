@@ -1,34 +1,24 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
-import "./transfer-filter.css";
-import { useDispatch, useSelector } from "react-redux";
-import * as actions from "../../redux/actions";
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { useEffect } from 'react';
+import './transfer-filter.css';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from '../../redux/actions';
 
-function TransferFilter({ getFilteredTickets }) {
+function TransferFilter() {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const filterInputs = selector.transferFilter;
-  let tickets = selector.tickets;
+  const { tickets } = selector;
 
-  const allFilter = () => {
-    return tickets.filter((ticket) => ticket);
-  };
+  const allFilter = () => tickets.filter((ticket) => ticket);
 
-  const noTransfer = () => {
-    return tickets.filter((ticket) => ticket.segments[0].stops.length === 0);
-  };
+  const noTransfer = () => tickets.filter((ticket) => ticket.segments[0].stops.length === 0);
 
-  const oneTransfer = () => {
-    return tickets.filter((ticket) => ticket.segments[0].stops.length === 1);
-  };
+  const oneTransfer = () => tickets.filter((ticket) => ticket.segments[0].stops.length === 1);
 
-  const twoTransfers = () => {
-    return tickets.filter((ticket) => ticket.segments[0].stops.length === 2);
-  };
+  const twoTransfers = () => tickets.filter((ticket) => ticket.segments[0].stops.length === 2);
 
-  const threeTransfers = () => {
-    return tickets.filter((ticket) => ticket.segments[0].stops.length === 3);
-  };
+  const threeTransfers = () => tickets.filter((ticket) => ticket.segments[0].stops.length === 3);
 
   const filters = [
     allFilter,

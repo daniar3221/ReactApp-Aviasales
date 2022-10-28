@@ -1,8 +1,8 @@
 const defaultState = [];
 
-const ticketsReducer = (state = defaultState, action) => {
+const ticketsReducer = (state = defaultState, action = {}) => {
   switch (action.type) {
-    case "GET-FIRST-TICKETS":
+    case 'GET-FIRST-TICKETS':
       return [...action.payload];
 
     default:
