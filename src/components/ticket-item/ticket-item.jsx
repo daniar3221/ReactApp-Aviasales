@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import './ticket-item.css';
-import {
-  getHours, getMinutes, parseISO, addMinutes,
-} from 'date-fns';
+import { getHours, getMinutes, parseISO, addMinutes } from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 
 function TicketItem({ price, carrier, segments }) {
@@ -16,17 +14,12 @@ function TicketItem({ price, carrier, segments }) {
 
   const getDepartureTime = (segment) => {
     const hours = `00${getHours(parseISO(segments[segment].date))}`.slice(-2);
-    const minutes = `00${getMinutes(parseISO(segments[segment].date))}`.slice(
-      -2,
-    );
+    const minutes = `00${getMinutes(parseISO(segments[segment].date))}`.slice(-2);
     return `${hours}:${minutes}`;
   };
 
   const getArrivalTime = (segment) => {
-    const arrivalTime = addMinutes(
-      parseISO(segments[segment].date),
-      segments[segment].duration,
-    );
+    const arrivalTime = addMinutes(parseISO(segments[segment].date), segments[segment].duration);
     const hours = `00${getHours(arrivalTime)}`.slice(-2);
     const minutes = `00${getMinutes(arrivalTime)}`.slice(-2);
     return `${hours}:${minutes}`;
@@ -42,39 +35,24 @@ function TicketItem({ price, carrier, segments }) {
     return `${segments[segment].stops.length} ПЕРЕСАДКИ`;
   };
 
-  const transferCities = (segment) => segments[segment].stops.map((city) => (
-    <span className="transfer-city" key={uuidv4()}>
-      {city}
-    </span>
-  ));
+  const transferCities = (segment) =>
+    segments[segment].stops.map((city) => (
+      <span className="transfer-city" key={uuidv4()}>
+        {city}
+      </span>
+    ));
 
   return (
     <div className="ticket-item">
-      <h1 className="ticket-price">
-        {price.toLocaleString('ru-RU')}
-        {' '}
-        Р
-      </h1>
-      <img
-        className="company-logo"
-        src={`https:pics.avs.io/99/36/${carrier}.png`}
-        alt="logo"
-      />
+      <h1 className="ticket-price">{price.toLocaleString('ru-RU')} Р</h1>
+      <img className="company-logo" src={`https:pics.avs.io/99/36/${carrier}.png`} alt="logo" />
       <div className="ticket-to">
         <div className="way">
           <h4>
-            {segments[0].origin}
-            {' '}
-            -
-            {' '}
-            {segments[0].destination}
+            {segments[0].origin} - {segments[0].destination}
           </h4>
           <span>
-            {getDepartureTime(0)}
-            {' '}
-            -
-            {' '}
-            {getArrivalTime(0)}
+            {getDepartureTime(0)} - {getArrivalTime(0)}
           </span>
         </div>
 
@@ -91,18 +69,10 @@ function TicketItem({ price, carrier, segments }) {
       <div className="ticket-back">
         <div className="way">
           <h4>
-            {segments[1].origin}
-            {' '}
-            -
-            {' '}
-            {segments[1].destination}
+            {segments[1].origin} - {segments[1].destination}
           </h4>
           <span>
-            {getDepartureTime(1)}
-            {' '}
-            -
-            {' '}
-            {getArrivalTime(1)}
+            {getDepartureTime(1)} - {getArrivalTime(1)}
           </span>
         </div>
 

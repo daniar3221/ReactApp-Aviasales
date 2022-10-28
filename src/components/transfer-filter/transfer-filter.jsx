@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
 import './transfer-filter.css';
@@ -25,7 +26,7 @@ function TransferFilter() {
     noTransfer,
     oneTransfer,
     twoTransfers,
-    threeTransfers,
+    threeTransfers
   ];
 
   useEffect(() => {

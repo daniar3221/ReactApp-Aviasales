@@ -33,15 +33,13 @@ function TicketFilter() {
   }, [selector.sort]);
 
   const cheapSort = () => {
-    const cheapTickets = ticketsSelector.sort(
-      (prev, next) => prev.price - next.price,
-    );
+    const cheapTickets = ticketsSelector.sort((prev, next) => prev.price - next.price);
     dispatch(setSortedTicketsAction(cheapTickets));
   };
 
   const fastSort = () => {
     const fastTickets = ticketsSelector.sort(
-      (prev, next) => prev.segments[0].duration - next.segments[0].duration,
+      (prev, next) => prev.segments[0].duration - next.segments[0].duration
     );
     dispatch(setSortedTicketsAction(fastTickets));
   };

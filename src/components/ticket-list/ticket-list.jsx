@@ -15,11 +15,7 @@ function TicketList() {
   return (
     <div className="ticket-list">
       {tickets}
-      <button
-        type="button"
-        className="show-more-btn"
-        onClick={() => dispatch(showMoreAction)}
-      >
+      <button type="button" className="show-more-btn" onClick={() => dispatch(showMoreAction)}>
         Показать еще 5 билетов
       </button>
     </div>
