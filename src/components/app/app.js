@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./app.css";
 import Logo from "../../img/Logo.png";
 import TransferFilter from "../transfer-filter/transfer-filter";
@@ -18,7 +18,6 @@ function App() {
   const searchId = useSelector((state) => state.searchId);
   const onloadingSelector = useSelector((state) => state.onLoad);
   const onErrorSelector = useSelector((state) => state.onError);
-  const quantityTicketsSelector = useSelector((state) => state.quantityTickets);
 
   let ticketsSelector = useSelector((state) => state.tickets);
 

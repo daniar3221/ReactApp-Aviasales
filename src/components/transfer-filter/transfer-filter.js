@@ -45,7 +45,7 @@ function TransferFilter({ getFilteredTickets }) {
       dispatch(actions.setFilteredTicketsAction(filteredTickets));
       return;
     }
-    filterInputs.slice(1).map((filterInput, idx) => {
+    filterInputs.slice(1).forEach((filterInput, idx) => {
       if (filterInput) {
         const filterResult = filters[idx + 1]();
         filteredTickets.push(...filterResult);
