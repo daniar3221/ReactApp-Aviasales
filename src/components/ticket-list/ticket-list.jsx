@@ -9,15 +9,29 @@ import './ticket-list.css';
 function TicketList() {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
+
   const tickets = selector.renderedTicket
     .slice(0, selector.quantityTickets)
     .map((ticket) => <TicketItem key={uuidv4()} {...ticket} />);
-  return (
-    <div className="ticket-list">
+
+  const noTicketsAvailable = () => (
+    <div className="error-div">
+      No flights matching <br /> the specified filters were found
+    </div>
+  );
+
+  const ticketList = () => (
+    <div>
       {tickets}
       <button type="button" className="show-more-btn" onClick={() => dispatch(showMoreAction)}>
         Показать еще 5 билетов
       </button>
+    </div>
+  );
+
+  return (
+    <div className="ticket-wrapper">
+      {selector.renderedTicket.length === 0 ? noTicketsAvailable() : ticketList()}
     </div>
   );
 }

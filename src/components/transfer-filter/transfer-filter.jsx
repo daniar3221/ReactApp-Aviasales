@@ -34,15 +34,19 @@ function TransferFilter() {
     if (filterInputs[0]) {
       filteredTickets = tickets;
       dispatch(actions.setFilteredTicketsAction(filteredTickets));
-      return;
+    } else if (!filterInputs.includes(true)) {
+      dispatch(actions.setFilteredTicketsAction([]))
+    } else {
+      filterInputs.slice(1).forEach((filterInput, idx) => {
+        if (filterInput) {
+          const filterResult = filters[idx + 1]();
+          filteredTickets.push(...filterResult);
+          dispatch(actions.setFilteredTicketsAction(filteredTickets));
+        }
+      });
     }
-    filterInputs.slice(1).forEach((filterInput, idx) => {
-      if (filterInput) {
-        const filterResult = filters[idx + 1]();
-        filteredTickets.push(...filterResult);
-        dispatch(actions.setFilteredTicketsAction(filteredTickets));
-      }
-    });
+
+
   }, [filterInputs]);
 
   return (
