@@ -11,6 +11,7 @@ import onErrorReducer from './onErrorReducer';
 import sortTicketsReducer from './sortTicketsReducer';
 import quantityTickets from './quantityTicketsReducer';
 import renderedTicketsReducer from './renderedTicketsReducer';
+import areAllTicketsLoaded from './areAllTicketsLoaded';
 
 const rootReducer = combineReducers({
   tickets: ticketsReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   sort: sortTicketsReducer,
   quantityTickets,
   renderedTicket: renderedTicketsReducer,
+  areAllTicketsLoaded,
 });
 
 // const loggerMiddleware = (store) => (next) => (action) => {

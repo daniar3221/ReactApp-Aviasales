@@ -1,8 +1,9 @@
 import {
   initSearchIdAction,
-  getFirstTicketsAction,
+  getTicketsAction,
   finishLoadingAction,
-  onErrorAction,
+  // onErrorAction,
+  stopLoadTicketsAction,
 } from '../../redux/actions';
 
 export const getSearchId = () => (dispatch) => {
@@ -11,15 +12,27 @@ export const getSearchId = () => (dispatch) => {
     .then((search) => dispatch(initSearchIdAction(search.searchId)));
 };
 
-export const getFirstTickets = (searchId) => (dispatch) => {
+export const getTickets = (searchId) => (dispatch) => {
   fetch(`https://front-test.dev.aviasales.ru/tickets?searchId=${searchId}`)
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.status !== 200) throw new Error('Ошибка');
+      else return response.json();
+    })
     .then((tickets) => {
-      dispatch(getFirstTicketsAction(tickets.tickets));
-      dispatch(finishLoadingAction);
+      // console.log(tickets);
+      if (!tickets.stop) {
+        dispatch(getTicketsAction(tickets.tickets));
+        dispatch(finishLoadingAction);
+        dispatch(getTickets(searchId));
+      } else {
+        dispatch(stopLoadTicketsAction());
+      }
     })
     .catch(() => {
-      dispatch(onErrorAction);
-      dispatch(finishLoadingAction);
+      // console.log(e);
+      dispatch(getTickets(searchId));
     });
 };
+
+// dispatch(onErrorAction);
+// dispatch(finishLoadingAction);

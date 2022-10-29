@@ -13,7 +13,6 @@ function TicketList() {
   const tickets = selector.renderedTicket
     .slice(0, selector.quantityTickets)
     .map((ticket) => <TicketItem key={uuidv4()} {...ticket} />);
-
   const noTicketsAvailable = () => (
     <div className="error-div">
       No flights matching <br /> the specified filters were found

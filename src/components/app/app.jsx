@@ -10,7 +10,7 @@ import TicketList from '../ticket-list/ticket-list';
 import Spinner from '../spinner/spiner';
 import 'antd/dist/antd.min.css';
 import { initRenderedTicketsAction } from '../../redux/actions';
-import { getSearchId, getFirstTickets } from '../services/services';
+import { getSearchId, getTickets } from '../services/services';
 
 function App() {
   const dispatch = useDispatch();
@@ -18,8 +18,8 @@ function App() {
   const searchId = useSelector((state) => state.searchId);
   const onloadingSelector = useSelector((state) => state.onLoad);
   const onErrorSelector = useSelector((state) => state.onError);
-
   const ticketsSelector = useSelector((state) => state.tickets);
+  // const allTicketsLoadedSelector = useSelector((state) => state.areAllTicketsLoaded);
 
   useEffect(() => {
     dispatch(getSearchId());
@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     if (!searchId) return;
-    dispatch(getFirstTickets(searchId));
+    dispatch(getTickets(searchId));
   }, [dispatch, searchId]);
 
   useEffect(() => {

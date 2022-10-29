@@ -46,7 +46,11 @@ export const initSearchIdAction = (payload) => ({
   payload,
 });
 
-export const getFirstTicketsAction = (payload) => ({
-  type: 'GET-FIRST-TICKETS',
+export const getTicketsAction = (payload) => ({
+  type: 'GET-TICKETS',
   payload,
+});
+
+export const stopLoadTicketsAction = () => ({
+  type: 'TRUE',
 });
