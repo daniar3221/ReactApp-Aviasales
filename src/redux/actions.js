@@ -31,14 +31,16 @@ export const initRenderedTicketsAction = (payload) => ({
   payload,
 });
 
-export const setFilteredTicketsAction = (payload) => ({
+export const filteredTicketsAction = (payload, filter) => ({
   type: 'FILTER',
   payload,
+  filter,
 });
 
-export const setSortedTicketsAction = (payload) => ({
+export const sortedTicketsAction = (payload, sort) => ({
   type: 'SORT',
   payload,
+  sort,
 });
 
 export const initSearchIdAction = (payload) => ({

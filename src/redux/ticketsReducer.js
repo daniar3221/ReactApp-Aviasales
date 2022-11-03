@@ -3,7 +3,7 @@ const defaultState = [];
 const ticketsReducer = (state = defaultState, action = {}) => {
   switch (action.type) {
     case 'GET-TICKETS':
-      return [...state, ...action.payload];
+      return [...action.payload, ...state];
 
     default:
       return state;

@@ -2,7 +2,6 @@ import {
   initSearchIdAction,
   getTicketsAction,
   finishLoadingAction,
-  // onErrorAction,
   stopLoadTicketsAction,
 } from '../../redux/actions';
 
@@ -21,7 +20,6 @@ export const getTickets = (searchId) => (dispatch) => {
       else return response.json();
     })
     .then((tickets) => {
-      // console.log(tickets);
       if (!tickets.stop) {
         dispatch(getTicketsAction(tickets.tickets));
         dispatch(finishLoadingAction);
@@ -32,13 +30,8 @@ export const getTickets = (searchId) => (dispatch) => {
     })
     .catch(() => {
       countFetch -= 1;
-      // console.log(countFetch);
-      // console.log(e);
       if (countFetch > 0) {
         dispatch(getTickets(searchId));
       }
     });
 };
-
-// dispatch(onErrorAction);
-// dispatch(finishLoadingAction);

@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect } from 'react';
+import React from 'react';
 import './transfer-filter.css';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../redux/actions';
@@ -8,46 +8,6 @@ import * as actions from '../../redux/actions';
 function TransferFilter() {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const filterInputs = selector.transferFilter;
-  const { tickets } = selector;
-
-  const allFilter = () => tickets.filter((ticket) => ticket);
-
-  const noTransfer = () => tickets.filter((ticket) => ticket.segments[0].stops.length === 0);
-
-  const oneTransfer = () => tickets.filter((ticket) => ticket.segments[0].stops.length === 1);
-
-  const twoTransfers = () => tickets.filter((ticket) => ticket.segments[0].stops.length === 2);
-
-  const threeTransfers = () => tickets.filter((ticket) => ticket.segments[0].stops.length === 3);
-
-  const filters = [
-    allFilter,
-    noTransfer,
-    oneTransfer,
-    twoTransfers,
-    threeTransfers
-  ];
-
-  useEffect(() => {
-    let filteredTickets = [];
-    if (filterInputs[0]) {
-      filteredTickets = tickets;
-      dispatch(actions.setFilteredTicketsAction(filteredTickets));
-    } else if (!filterInputs.includes(true)) {
-      dispatch(actions.setFilteredTicketsAction([]))
-    } else {
-      filterInputs.slice(1).forEach((filterInput, idx) => {
-        if (filterInput) {
-          const filterResult = filters[idx + 1]();
-          filteredTickets.push(...filterResult);
-          dispatch(actions.setFilteredTicketsAction(filteredTickets));
-        }
-      });
-    }
-
-
-  }, [filterInputs]);
 
   return (
     <div className="transfer-filter">

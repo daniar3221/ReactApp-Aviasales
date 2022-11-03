@@ -9,7 +9,11 @@ import TicketSort from '../ticket-sort/ticket-sort';
 import TicketList from '../ticket-list/ticket-list';
 import Spinner from '../spinner/spiner';
 import 'antd/dist/antd.min.css';
-import { initRenderedTicketsAction } from '../../redux/actions';
+import {
+  initRenderedTicketsAction,
+  sortedTicketsAction,
+  filteredTicketsAction,
+} from '../../redux/actions';
 import { getSearchId, getTickets } from '../services/services';
 
 function App() {
@@ -18,8 +22,10 @@ function App() {
   const searchId = useSelector((state) => state.searchId);
   const onloadingSelector = useSelector((state) => state.onLoad);
   const onErrorSelector = useSelector((state) => state.onError);
-  const ticketsSelector = useSelector((state) => state.tickets);
-  // const allTicketsLoadedSelector = useSelector((state) => state.areAllTicketsLoaded);
+  const allTicketsSelector = useSelector((state) => state.tickets);
+  const transferFilterInputsSelector = useSelector((state) => state.transferFilter);
+  const sortTypeSelector = useSelector((state) => state.sort);
+  const renderedTicketsSelector = useSelector((state) => state.renderedTicket);
 
   useEffect(() => {
     dispatch(getSearchId());
@@ -30,9 +36,12 @@ function App() {
     dispatch(getTickets(searchId));
   }, [dispatch, searchId]);
 
+  // юзэффект при изменении фильтра и сортировки и получения первой пачки
   useEffect(() => {
-    dispatch(initRenderedTicketsAction(ticketsSelector));
-  }, [dispatch, ticketsSelector]);
+    dispatch(initRenderedTicketsAction(allTicketsSelector)); // обновил рендерТикеты в дефолт
+    dispatch(filteredTicketsAction(allTicketsSelector, transferFilterInputsSelector)); // фильтрация тикетов
+    dispatch(sortedTicketsAction(renderedTicketsSelector, sortTypeSelector)); // сортировка тикетов
+  }, [allTicketsSelector, transferFilterInputsSelector, sortTypeSelector]);
 
   const errorDiv = () => (
     <div className="error-div">

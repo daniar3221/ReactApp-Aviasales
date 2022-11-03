@@ -5,13 +5,12 @@ import {
   sortFastTicketsAction,
   sortOptimalTicketsAction,
   backToFiveAction,
-  setSortedTicketsAction,
+  // setSortedTicketsAction,
 } from '../../redux/actions';
 import './ticket-sort.css';
 
 function TicketFilter() {
   const dispatch = useDispatch();
-  const ticketsSelector = useSelector((state) => state.renderedTicket);
   const selector = useSelector((state) => state);
 
   useEffect(() => {
@@ -32,23 +31,6 @@ function TicketFilter() {
     }
   }, [selector.sort]);
 
-  const cheapSort = () => {
-    const cheapTickets = ticketsSelector.sort((prev, next) => prev.price - next.price);
-    dispatch(setSortedTicketsAction(cheapTickets));
-  };
-
-  const fastSort = () => {
-    const fastTickets = ticketsSelector.sort(
-      (prev, next) => prev.segments[0].duration - next.segments[0].duration
-    );
-    dispatch(setSortedTicketsAction(fastTickets));
-  };
-
-  const optimalSort = () => {
-    const optimalTickets = ticketsSelector.sort((a, b) => a.carrier.localeCompare(b.carrier));
-    dispatch(setSortedTicketsAction(optimalTickets));
-  };
-
   return (
     <div className="ticket-filter">
       <button
@@ -57,7 +39,7 @@ function TicketFilter() {
         onClick={() => {
           dispatch(backToFiveAction);
           dispatch(sortCheapTicketsAction);
-          cheapSort();
+          // cheapSort();
         }}
       >
         САМЫЙ ДЕШЕВЫЙ
@@ -68,7 +50,7 @@ function TicketFilter() {
         onClick={() => {
           dispatch(backToFiveAction);
           dispatch(sortFastTicketsAction);
-          fastSort();
+          // fastSort();
         }}
       >
         САМЫЙ БЫСТРЫЙ
@@ -79,7 +61,7 @@ function TicketFilter() {
         onClick={() => {
           dispatch(backToFiveAction);
           dispatch(sortOptimalTicketsAction);
-          optimalSort();
+          // optimalSort();
         }}
       >
         ОПТИМАЛЬНЫЙ
